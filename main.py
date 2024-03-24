@@ -1,9 +1,13 @@
+print("Loading... Wait Patiently")
+
 import numpy as np
 import pandas as pd
 import ast
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem.porter import PorterStemmer
+import subprocess
+
 
 credits_df = pd.read_csv("credits.csv") 
 movies_df = pd.read_csv("movies.csv")
@@ -94,6 +98,29 @@ def recommend(movie):
         print(new_df.iloc[i[0]].title)
 
 
-movie_input = input("Enter Movie : ")
-print("Recommendations Based On Your Preference:")
-recommend(movie_input)
+# Clear the terminal screen
+subprocess.call('clear', shell=True)
+
+print('''  __  __            _        _____                                                   _       _   _                _____           _                 
+ |  \/  |          (_)      |  __ \                                                 | |     | | (_)              / ____|         | |                
+ | \  / | _____   ___  ___  | |__) |___  ___ ___  _ __ ___  _ __ ___   ___ _ __   __| | __ _| |_ _  ___  _ __   | (___  _   _ ___| |_ ___ _ __ ___  
+ | |\/| |/ _ \ \ / / |/ _ \ |  _  // _ \/ __/ _ \| '_ ` _ \| '_ ` _ \ / _ \ '_ \ / _` |/ _` | __| |/ _ \| '_ \   \___ \| | | / __| __/ _ \ '_ ` _ \ 
+ | |  | | (_) \ V /| |  __/ | | \ \  __/ (_| (_) | | | | | | | | | | |  __/ | | | (_| | (_| | |_| | (_) | | | |  ____) | |_| \__ \ ||  __/ | | | | |
+ |_|  |_|\___/ \_/ |_|\___| |_|  \_\___|\___\___/|_| |_| |_|_| |_| |_|\___|_| |_|\__,_|\__,_|\__|_|\___/|_| |_| |_____/ \__, |___/\__\___|_| |_| |_|
+                                                                                                                         __/ |                      
+                                                                                                                        |___/                       ''')
+
+while(True):
+    try:
+        movie_input = input("\nEnter Movie : ")
+        print("\nRecommendations Based On Your Preference:\n")
+        recommend(movie_input)
+    except:
+        print("Movie Not Found\n")
+
+    c = input("Continue(Y/N):\n")
+    if c=='N' or c=='n':
+        break
+
+print("Thank You")
+subprocess.call('clear', shell=True)
